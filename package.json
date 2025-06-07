@@ -11,7 +11,9 @@
     "turbo:all": "pnpm run build && pnpm run lint && pnpm run type-check"
   },
   "dependencies": {
+    "@types/nodemailer": "^6.4.17",
     "next": "^15.3.3",
+    "nodemailer": "^7.0.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "styled-components": "^6.1.13"
