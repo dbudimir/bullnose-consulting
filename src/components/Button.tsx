@@ -7,6 +7,8 @@ interface ButtonProps {
   text: string;
   onClick?: () => void;
   color?: string;
+  type?: "button" | "submit" | "reset";
+  disabled?: boolean;
 }
 
 const sizeConfig = {
@@ -39,38 +41,45 @@ const sizeConfig = {
   },
 };
 
-const StyledButton = styled.button<{ $size: ButtonSize; $color: string }>`
+const StyledButton = styled.button<{
+  $size: ButtonSize;
+  $color: string;
+  $disabled?: boolean;
+}>`
   font-family: "Helvetica", Arial, sans-serif;
   font-size: ${({ $size }) => sizeConfig[$size].fontSize};
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.025em;
 
-  background: ${({ $color }) => $color};
+  background: ${({ $color, $disabled }) => ($disabled ? "#9ca3af" : $color)};
   color: white;
   border: none;
   padding: ${({ $size }) => sizeConfig[$size].padding};
-  cursor: pointer !important;
+  cursor: ${({ $disabled }) =>
+    $disabled ? "not-allowed" : "pointer"} !important;
   transition: all 0.2s ease;
   width: max-content;
   border-radius: 2px;
   border-top-right-radius: ${({ $size }) => sizeConfig[$size].cornerRadius};
+  opacity: ${({ $disabled }) => ($disabled ? 0.6 : 1)};
 
   &:hover {
-    opacity: 0.9;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(35, 33, 102, 0.3);
+    opacity: ${({ $disabled }) => ($disabled ? 0.6 : 0.9)};
+    transform: ${({ $disabled }) => ($disabled ? "none" : "translateY(-1px)")};
+    box-shadow: ${({ $disabled }) =>
+      $disabled ? "none" : "0 4px 12px rgba(35, 33, 102, 0.3)"};
   }
 
   &:active {
-    transform: translateY(0);
+    transform: ${({ $disabled }) => ($disabled ? "none" : "translateY(0)")};
   }
 
-  @media (max-width: 768px) {
+  ${(props) => props.theme.mediaQueries.tablet} {
     font-size: 0.9em;
   }
 
-  @media (max-width: 480px) {
+  ${(props) => props.theme.mediaQueries.mobile} {
     font-size: 0.8em;
   }
 `;
@@ -80,9 +89,18 @@ export default function Button({
   text,
   onClick,
   color = "#98b21d",
+  type = "button",
+  disabled = false,
 }: ButtonProps) {
   return (
-    <StyledButton $size={size} $color={color} onClick={onClick}>
+    <StyledButton
+      $size={size}
+      $color={color}
+      $disabled={disabled}
+      onClick={onClick}
+      type={type}
+      disabled={disabled}
+    >
       {text}
     </StyledButton>
   );

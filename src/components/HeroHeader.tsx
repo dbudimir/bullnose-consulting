@@ -1,5 +1,7 @@
 import styled from "styled-components";
+import Image from "next/image";
 import Button from "./Button";
+import { scrollToAnchor } from "../helpers/scrollToAnchor";
 
 const HeroContainer = styled.section`
   width: 100%;
@@ -13,10 +15,6 @@ const HeroImageWrapper = styled.div`
   width: 100%;
   max-width: 1200px;
   min-height: 600px;
-  background-image: url("/static-assets/hero-image.png");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
   border-radius: 5px 30px 5px 5px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   padding: 2rem 5rem;
@@ -24,6 +22,15 @@ const HeroImageWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
+  overflow: hidden;
+
+  ${(props) => props.theme.mediaQueries.tablet} {
+    padding: 1.5rem 2rem;
+  }
+
+  ${(props) => props.theme.mediaQueries.mobile} {
+    padding: 1rem 1.5rem;
+  }
 
   /* Optional: Add a subtle overlay for better text readability */
   &::before {
@@ -43,6 +50,10 @@ const HeroImageWrapper = styled.div`
   }
 `;
 
+const StyledImage = styled(Image)`
+  border-radius: 5px 30px 5px 5px;
+`;
+
 const ContentWrapper = styled.div`
   position: relative;
   z-index: 2;
@@ -57,11 +68,11 @@ const ContentWrapper = styled.div`
     margin: 0 0 1rem 0;
     line-height: 0.9;
 
-    @media (max-width: 768px) {
+    ${(props) => props.theme.mediaQueries.tablet} {
       font-size: 2.5rem;
     }
 
-    @media (max-width: 480px) {
+    ${(props) => props.theme.mediaQueries.mobile} {
       font-size: 2rem;
     }
   }
@@ -79,14 +90,28 @@ export default function HeroHeader() {
   return (
     <HeroContainer>
       <HeroImageWrapper>
+        <StyledImage
+          src="/static-assets/hero-image.png"
+          alt="Hero background"
+          fill
+          style={{
+            objectFit: "cover",
+            objectPosition: "center",
+          }}
+          priority
+        />
         <ContentWrapper>
           <h1>Get control of your cash flow</h1>
           <p>
             Financial clarity and modern tools, backed by decades of real-world
-            construction and finance experience—built specifically for
+            construction and finance experience, built specifically for
             contractors.
           </p>
-          <Button text="Contact Us" size="md" />
+          <Button
+            text="Contact Us"
+            size="md"
+            onClick={() => scrollToAnchor("contact")}
+          />
         </ContentWrapper>
       </HeroImageWrapper>
     </HeroContainer>

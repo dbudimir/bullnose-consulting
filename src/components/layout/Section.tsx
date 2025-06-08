@@ -23,11 +23,11 @@ const SectionContainer = styled.section<{
   background-repeat: no-repeat;
   position: relative;
 
-  @media (max-width: 768px) {
+  ${(props) => props.theme.mediaQueries.tablet} {
     padding: 2.5rem 1rem;
   }
 
-  @media (max-width: 480px) {
+  ${(props) => props.theme.mediaQueries.mobile} {
     padding: 2rem 1rem;
   }
 `;

@@ -12,7 +12,7 @@ const Title = styled.h2`
   margin-bottom: 2rem;
   color: #333;
 
-  @media (max-width: 768px) {
+  ${(props) => props.theme.mediaQueries.tablet} {
     font-size: 2rem;
   }
 `;
@@ -25,7 +25,7 @@ const Content = styled.div`
   margin: 0 auto;
   text-align: left;
 
-  @media (max-width: 768px) {
+  ${(props) => props.theme.mediaQueries.tablet} {
     font-size: 1rem;
     line-height: 1.6;
   }
@@ -46,19 +46,25 @@ const About: React.FC = () => {
         <Title>About</Title>
         <Content>
           <p>
-            At Bullnose Consulting, we combine real-world construction
-            experience with CFO-level financial insight and modern technology
-            tools to help family-owned and independently-run contractors build
-            stronger, more profitable businesses. We&#39;ve spent over 20 years
-            in the field ourselves, so we understand the challenges you face—and
-            how the right systems, tools, and financial strategy can make all
-            the difference.
+            At Bullnose Consulting, we combine{" "}
+            <strong>real-world construction experience</strong> with{" "}
+            <strong>CFO-level financial insight</strong> and{" "}
+            <strong>modern technology tools</strong> to help family owned and
+            independently run contractors build stronger, more profitable
+            businesses. We&#39;ve spent over 20 years in the field ourselves, so
+            we understand the challenges you face and how the right systems,
+            tools, and financial strategy can make all the difference.
           </p>
           <p>
-            With Bullnose, you get high-level financial and tech
-            guidance—typically reserved for much larger companies—without the
-            bloated costs. We&#39;ll handle the numbers and modernize your
-            operations, so you can stay focused on what you do best: building.
+            We&#39;re passionate about supporting{" "}
+            <strong>Small to Medium-Sized construction companies</strong>. With
+            Bullnose, you get{" "}
+            <strong>high level financial and tech guidance</strong>—typically
+            reserved for much larger companies—without the bloated costs.
+          </p>
+          <p>
+            We&#39;ll handle the numbers and modernize your operations, so you
+            can stay focused on what you do best: building.
           </p>
         </Content>
       </AboutContainer>

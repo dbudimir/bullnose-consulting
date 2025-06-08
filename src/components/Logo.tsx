@@ -50,7 +50,16 @@ const sizeConfig = {
 
 const LogoContainer = styled.h1<{ $size: LogoSize; $variant: LogoVariant }>`
   font-family: "Helvetica", Arial, sans-serif;
-  font-size: ${({ $size }) => sizeConfig[$size].fontSize};
+  font-size: ${({ $size, $variant }) => {
+    const baseSize = sizeConfig[$size].fontSize;
+    // Make logomark variant 1.5x bigger
+    if ($variant === "logomark") {
+      const sizeValue = parseFloat(baseSize);
+      const unit = baseSize.replace(/[\d.]/g, "");
+      return `${sizeValue * 1.5}${unit}`;
+    }
+    return baseSize;
+  }};
   text-transform: uppercase;
   text-align: center;
   line-height: 1.2;
@@ -143,11 +152,11 @@ const HeavyText = styled.span<{ $size: LogoSize }>`
   display: block;
   letter-spacing: 0.025em;
 
-  @media (max-width: 768px) {
+  ${(props) => props.theme.mediaQueries.tablet} {
     font-size: 0.9em;
   }
 
-  @media (max-width: 480px) {
+  ${(props) => props.theme.mediaQueries.mobile} {
     font-size: 0.8em;
   }
 `;
@@ -157,11 +166,11 @@ const LightText = styled.span<{ $size: LogoSize }>`
   display: block;
   letter-spacing: -0.05em;
 
-  @media (max-width: 768px) {
+  ${(props) => props.theme.mediaQueries.tablet} {
     font-size: 0.9em;
   }
 
-  @media (max-width: 480px) {
+  ${(props) => props.theme.mediaQueries.mobile} {
     font-size: 0.8em;
   }
 `;

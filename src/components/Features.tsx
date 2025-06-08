@@ -25,7 +25,7 @@ const FeaturesGrid = styled.div`
     grid-column: 1 / -1;
   }
 
-  @media (max-width: 768px) {
+  ${(props) => props.theme.mediaQueries.tablet} {
     grid-template-columns: 1fr;
 
     & > :first-child {
@@ -85,11 +85,11 @@ const SectionTitle = styled.h2`
   margin: 0 0 2rem 0;
   line-height: 1.2;
 
-  @media (max-width: 768px) {
+  ${(props) => props.theme.mediaQueries.tablet} {
     font-size: 2rem;
   }
 
-  @media (max-width: 480px) {
+  ${(props) => props.theme.mediaQueries.mobile} {
     font-size: 1.5rem;
   }
 `;
@@ -99,7 +99,7 @@ const Features: React.FC = () => {
     <Section id="features">
       <FeaturesContainer>
         <SectionTitle>
-          Built by construction pros. <br /> Priced for the real world.
+          Big business services. <br /> Small business prices.
         </SectionTitle>
 
         {/* Top Feature */}
@@ -110,8 +110,8 @@ const Features: React.FC = () => {
             </IconContainer>
             <FeatureTitle>Diagnostic Assessment</FeatureTitle>
             <FeatureBenefit>
-              Pinpoints where your money is leaking and what&#39;s holding your
-              business back—so you can stop guessing and start fixing.
+              Pinpoint where your money is leaking and what&#39;s holding your
+              business back, so you can stop guessing and start fixing.
             </FeatureBenefit>
           </FeatureCard>
 
@@ -122,7 +122,7 @@ const Features: React.FC = () => {
             <FeatureTitle>Virtual CFO & Controller Services</FeatureTitle>
             <FeatureBenefit>
               Get high-level financial strategy and oversight without hiring
-              full-time staff—giving you clarity, control, and confidence in
+              full-time staff, giving you clarity, control, and confidence in
               your cash flow.
             </FeatureBenefit>
           </FeatureCard>
@@ -136,7 +136,7 @@ const Features: React.FC = () => {
             </FeatureTitle>
             <FeatureBenefit>
               Save hours of manual work, reduce costly errors, and get real-time
-              insights—so you can make smarter decisions, faster.
+              insights, so you can make smarter decisions, faster.
             </FeatureBenefit>
           </FeatureCard>
         </FeaturesGrid>

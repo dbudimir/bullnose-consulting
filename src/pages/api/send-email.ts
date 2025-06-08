@@ -4,7 +4,7 @@ import nodemailer from "nodemailer";
 interface ContactFormData {
   name: string;
   email: string;
-  subject?: string;
+  company?: string;
   message: string;
 }
 
@@ -12,12 +12,17 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  console.log("req.body", req.body);
+  console.log("env", process.env.EMAIL_USER);
+  console.log("env", process.env.EMAIL_APP_PASSWORD);
+  console.log("env", process.env.EMAIL_TO);
+
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Method not allowed" });
   }
 
   try {
-    const { name, email, subject, message }: ContactFormData = req.body;
+    const { name, email, company, message }: ContactFormData = req.body;
 
     // Validate required fields
     if (!name || !email || !message) {
@@ -43,14 +48,14 @@ export default async function handler(
     const mailOptions = {
       from: process.env.EMAIL_USER,
       to: process.env.EMAIL_TO,
-      subject: subject || `New Contact Form Submission from ${name}`,
+      subject: `Website Contact Form Submission from ${name}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
           <h2 style="color: #333;">New Contact Form Submission</h2>
           <div style="background-color: #f9f9f9; padding: 20px; border-radius: 5px;">
             <p><strong>Name:</strong> ${name}</p>
             <p><strong>Email:</strong> ${email}</p>
-            <p><strong>Subject:</strong> ${subject || "No subject provided"}</p>
+            <p><strong>Company:</strong> ${company ?? "No company provided"}</p>
             <div style="margin-top: 20px;">
               <strong>Message:</strong>
               <div style="background-color: white; padding: 15px; border-radius: 3px; margin-top: 10px;">
@@ -68,7 +73,7 @@ export default async function handler(
         
         Name: ${name}
         Email: ${email}
-        Subject: ${subject || "No subject provided"}
+        Company: ${company ?? "No company provided"}
         
         Message:
         ${message}

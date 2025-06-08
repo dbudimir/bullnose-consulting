@@ -25,16 +25,9 @@ const ContactTitle = styled.h2`
   color: #1a1a1a;
   margin-bottom: 1rem;
 
-  @media (max-width: 768px) {
+  ${(props) => props.theme.mediaQueries.tablet} {
     font-size: 1.75rem;
   }
-`;
-
-const ContactSubtitle = styled.p`
-  font-size: 1.125rem;
-  color: #6b7280;
-  margin-bottom: 3rem;
-  line-height: 1.6;
 `;
 
 const FormContainer = styled.form`
@@ -48,9 +41,9 @@ const FormContainer = styled.form`
   border-radius: 5px 30px 5px 5px;
   margin-right: 100%;
 
-  @media (max-width: 768px) {
+  ${(props) => props.theme.mediaQueries.tablet} {
     width: 100%;
-    margin-right: 0;
+    margin: -200px auto 0;
     padding: 1.5rem;
   }
 `;
@@ -176,7 +169,18 @@ const Contact: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    // Validate required fields
+    if (!formData.name.trim() || !formData.email.trim()) {
+      setStatus({
+        type: "error",
+        message: "Please fill in all required fields.",
+      });
+      return;
+    }
+
     setStatus({ type: "loading", message: "Sending your message..." });
+
+    console.log("formData", formData);
 
     try {
       const response = await fetch("/api/send-email", {
@@ -193,7 +197,7 @@ const Contact: React.FC = () => {
         setStatus({
           type: "success",
           message:
-            "Thank you! Your message has been sent successfully. We&#39;ll get back to you soon.",
+            "Thank you! Your message has been sent successfully. We'll get back to you soon.",
         });
         setFormData({ name: "", email: "", company: "", message: "" });
       } else {
@@ -212,12 +216,12 @@ const Contact: React.FC = () => {
 
   return (
     <SplitSection
-      backgroundColor="#f9fafb"
+      backgroundColor="#232166"
       id="contact"
       imageSrc="/static-assets/house-project.png"
     >
       <ContactContainer>
-        <FormContainer>
+        <FormContainer onSubmit={handleSubmit}>
           <ContactTitle>Get In Touch</ContactTitle>
 
           <FormGroup>
@@ -265,17 +269,13 @@ const Contact: React.FC = () => {
           </FormGroup>
 
           <FormGroup>
-            <Label htmlFor="message">
-              Message
-              <RequiredIndicator>*</RequiredIndicator>
-            </Label>
+            <Label htmlFor="message">Message</Label>
             <TextArea
               id="message"
               name="message"
               value={formData.message}
               onChange={handleChange}
               placeholder="Tell us about your project or how we can help..."
-              required
             />
           </FormGroup>
 
@@ -284,27 +284,8 @@ const Contact: React.FC = () => {
               text={status.type === "loading" ? "Sending..." : "Send Message"}
               size="md"
               color="#3b82f6"
-              onClick={() => {
-                // Validate required fields
-                if (
-                  !formData.name.trim() ||
-                  !formData.email.trim() ||
-                  !formData.message.trim()
-                ) {
-                  setStatus({
-                    type: "error",
-                    message: "Please fill in all required fields.",
-                  });
-                  return;
-                }
-
-                // Create a synthetic event to pass to handleSubmit
-                const syntheticEvent = {
-                  preventDefault: () => {},
-                } as React.FormEvent;
-
-                handleSubmit(syntheticEvent);
-              }}
+              type="submit"
+              disabled={status.type === "loading"}
             />
           </SubmitButtonContainer>
 

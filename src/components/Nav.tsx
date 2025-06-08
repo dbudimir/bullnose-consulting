@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Logo from "./Logo";
 import Button from "./Button";
+import { scrollToAnchor } from "../helpers/scrollToAnchor";
 
 const NavContainer = styled.nav<{ $hasBackground: boolean }>`
   position: sticky;
@@ -15,7 +16,7 @@ const NavContainer = styled.nav<{ $hasBackground: boolean }>`
   box-shadow: ${(props) =>
     props.$hasBackground ? "0 2px 20px rgba(0, 0, 0, 0.1)" : "none"};
 
-  @media (max-width: 768px) {
+  ${(props) => props.theme.mediaQueries.tablet} {
     padding: 1rem;
   }
 `;
@@ -35,7 +36,7 @@ const NavItems = styled.div`
   align-items: center;
   gap: 2rem;
 
-  @media (max-width: 768px) {
+  ${(props) => props.theme.mediaQueries.tablet} {
     display: none;
   }
 `;
@@ -61,7 +62,7 @@ const MobileMenuButton = styled.button`
   padding: 0.5rem;
   color: #333;
 
-  @media (max-width: 768px) {
+  ${(props) => props.theme.mediaQueries.tablet} {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -71,7 +72,7 @@ const MobileMenuButton = styled.button`
 const MobileMenu = styled.div<{ $isOpen: boolean }>`
   display: none;
 
-  @media (max-width: 768px) {
+  ${(props) => props.theme.mediaQueries.tablet} {
     display: ${(props) => (props.$isOpen ? "flex" : "none")};
     position: absolute;
     top: 100%;
@@ -162,16 +163,7 @@ const Nav: React.FC = () => {
   }, []);
 
   const handleContactClick = () => {
-    const contactElement = document.getElementById("contact");
-    if (contactElement) {
-      const elementPosition = contactElement.offsetTop;
-      const offsetPosition = elementPosition - 100; // 100px offset for spacing
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: "smooth",
-      });
-    }
+    scrollToAnchor("contact");
   };
 
   const toggleMobileMenu = () => {
@@ -197,18 +189,7 @@ const Nav: React.FC = () => {
               onClick={(e) => {
                 if (item.url.startsWith("#")) {
                   e.preventDefault();
-                  const element = document.getElementById(
-                    item.url.substring(1)
-                  );
-                  if (element) {
-                    const elementPosition = element.offsetTop;
-                    const offsetPosition = elementPosition - 100; // 100px offset for spacing
-
-                    window.scrollTo({
-                      top: offsetPosition,
-                      behavior: "smooth",
-                    });
-                  }
+                  scrollToAnchor(item.url.substring(1));
                 }
               }}
             >
@@ -225,9 +206,9 @@ const Nav: React.FC = () => {
             size="sm"
           />
 
-          <MobileMenuButton onClick={toggleMobileMenu}>
+          {/* <MobileMenuButton onClick={toggleMobileMenu}>
             <HamburgerIcon />
-          </MobileMenuButton>
+          </MobileMenuButton> */}
         </div>
       </NavContent>
 
@@ -239,13 +220,7 @@ const Nav: React.FC = () => {
             onClick={(e) => {
               if (item.url.startsWith("#")) {
                 e.preventDefault();
-                const element = document.getElementById(item.url.substring(1));
-                if (element) {
-                  window.scrollTo({
-                    top: element.offsetTop,
-                    behavior: "smooth",
-                  });
-                }
+                scrollToAnchor(item.url.substring(1));
               }
               setIsMobileMenuOpen(false);
             }}

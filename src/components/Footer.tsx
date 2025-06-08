@@ -11,7 +11,7 @@ const FooterContainer = styled.footer`
   display: flex;
   flex-direction: column;
 
-  @media (max-width: 768px) {
+  ${(props) => props.theme.mediaQueries.tablet} {
     height: 300px;
   }
 `;
@@ -52,7 +52,7 @@ const FooterBar = styled.div`
   padding: 1.5rem 2rem;
   box-shadow: 0 -2px 20px rgba(0, 0, 0, 0.1);
 
-  @media (max-width: 768px) {
+  ${(props) => props.theme.mediaQueries.tablet} {
     padding: 1rem;
   }
 `;
@@ -66,7 +66,7 @@ const FooterBarContent = styled.div`
   gap: 2rem;
   padding: 1rem 0;
 
-  @media (max-width: 768px) {
+  ${(props) => props.theme.mediaQueries.tablet} {
     flex-direction: column;
     gap: 1rem;
     text-align: center;
@@ -91,7 +91,7 @@ const LogoContainer = styled.div`
     width: 240px;
     height: auto;
 
-    @media (max-width: 768px) {
+    ${(props) => props.theme.mediaQueries.tablet} {
       width: 100px;
     }
   }

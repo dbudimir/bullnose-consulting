@@ -21,7 +21,7 @@ const SplitContainer = styled.section<{
   position: relative;
   min-height: 100%;
 
-  @media (max-width: 968px) {
+  ${(props) => props.theme.mediaQueries.tablet} {
     display: flex;
     flex-direction: column;
     min-height: auto;
@@ -33,7 +33,7 @@ const ContentSide = styled.div`
   background: transparent;
   min-height: 100%;
 
-  @media (max-width: 968px) {
+  ${(props) => props.theme.mediaQueries.tablet} {
     width: 100%;
     min-height: auto;
   }
@@ -53,13 +53,13 @@ const ContentContainer = styled.div`
     max-width: 1200px;
   }
 
-  @media (max-width: 968px) {
+  ${(props) => props.theme.mediaQueries.tablet} {
     grid-column: auto;
     grid-row: auto;
     padding: 2.5rem 1rem;
   }
 
-  @media (max-width: 480px) {
+  ${(props) => props.theme.mediaQueries.mobile} {
     padding: 2rem 1rem;
   }
 `;
@@ -72,13 +72,13 @@ const ImageSide = styled.div<{ $imageSrc: string }>`
   background-repeat: no-repeat;
   min-height: 400px;
 
-  @media (max-width: 968px) {
+  ${(props) => props.theme.mediaQueries.tablet} {
     width: 100%;
     min-height: 300px;
     order: -1;
   }
 
-  @media (max-width: 480px) {
+  ${(props) => props.theme.mediaQueries.mobile} {
     min-height: 250px;
   }
 `;
