@@ -10,8 +10,7 @@ const NavContainer = styled.nav<{ $hasBackground: boolean }>`
   z-index: 1000;
   padding: 1rem 2rem;
   transition: all 0.3s ease;
-  background-color: ${(props) =>
-    props.$hasBackground ? "rgba(255, 255, 255, 0.95)" : "transparent"};
+  background-color: rgba(255, 255, 255, 0.95);
   backdrop-filter: ${(props) => (props.$hasBackground ? "blur(10px)" : "none")};
   box-shadow: ${(props) =>
     props.$hasBackground ? "0 2px 20px rgba(0, 0, 0, 0.1)" : "none"};
