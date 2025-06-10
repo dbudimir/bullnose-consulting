@@ -5,6 +5,7 @@ import Section from "./layout/Section";
 // Import SVG icons as React components
 import DiagnosticAssessment from "../icons/DiagnosticAssessment";
 import VirtualCFO from "../icons/VirtualCFO";
+import StrategicPartnership from "../icons/StrategicPartnership";
 import TechIntegration from "../icons/TechIntegration";
 
 const FeaturesContainer = styled.div`
@@ -19,11 +20,6 @@ const FeaturesGrid = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 2rem;
-
-  /* First child spans full width */
-  & > :first-child {
-    grid-column: 1 / -1;
-  }
 
   ${(props) => props.theme.mediaQueries.tablet} {
     grid-template-columns: 1fr;
@@ -50,7 +46,7 @@ const FeatureCard = styled.div`
 const IconContainer = styled.div`
   width: 60px;
   height: 60px;
-  margin: 0 auto 1.5rem auto;
+  margin: 0 auto 1rem auto;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -58,6 +54,11 @@ const IconContainer = styled.div`
   svg {
     width: 100%;
     height: 100%;
+  }
+
+  ${(props) => props.theme.mediaQueries.mobile} {
+    width: 45px;
+    height: 45px;
   }
 `;
 
@@ -124,6 +125,19 @@ const Features: React.FC = () => {
               Get high-level financial strategy and oversight without hiring
               full-time staff, giving you clarity, control, and confidence in
               your cash flow.
+            </FeatureBenefit>
+          </FeatureCard>
+
+          <FeatureCard>
+            <IconContainer>
+              <StrategicPartnership />
+            </IconContainer>
+            <FeatureTitle>Strategic Partnership</FeatureTitle>
+            <FeatureBenefit>
+              Ongoing, month-to-month support from experts who know construction
+              and finance. We help you tighten cash flow, clean up receivables,
+              and streamline your back office—so you get paid faster and run
+              smarter, without big-firm costs.
             </FeatureBenefit>
           </FeatureCard>
 

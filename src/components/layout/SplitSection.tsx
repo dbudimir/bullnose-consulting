@@ -85,7 +85,7 @@ const ImageSide = styled.div<{ $imageSrc: string }>`
 
 const SplitSection: React.FC<SplitSectionProps> = ({
   children,
-  imageSrc = "/static-assets/hero-image.png",
+  imageSrc = "/static-assets/hero.png",
   imageAlt = "Section background image",
   backgroundColor,
   className,

@@ -173,7 +173,7 @@ const Nav: React.FC = () => {
     <NavContainer $hasBackground={hasBackground}>
       <NavContent>
         <Logo
-          size="xsm"
+          size="sm"
           variant={isMobile ? "logomark" : "row"}
           animateLogo={true}
         />

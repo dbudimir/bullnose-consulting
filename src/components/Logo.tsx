@@ -1,3 +1,4 @@
+import LogoMark from "@/icons/LogoMark";
 import styled, { css } from "styled-components";
 
 type LogoSize = "xsm" | "sm" | "md" | "lg";
@@ -83,36 +84,6 @@ const LogoContainer = styled.h1<{ $size: LogoSize; $variant: LogoVariant }>`
         : "1rem"
       : "0"};
   z-index: 1;
-
-  &::before,
-  &::after {
-    content: "";
-    position: absolute;
-    width: ${({ $size }) => sizeConfig[$size].cornerWidth};
-    height: ${({ $size }) => sizeConfig[$size].cornerHeight};
-    border: ${({ $size }) => sizeConfig[$size].borderWidth} solid navy;
-    background: transparent;
-    z-index: 0;
-  }
-
-  /* Top-right: rounded corner - pushed out */
-  &::before {
-    top: -${({ $size }) => sizeConfig[$size].offset};
-    right: -${({ $size }) => sizeConfig[$size].offset};
-    border-left: none;
-    border-bottom: none;
-    border-top-right-radius: ${({ $size }) => sizeConfig[$size].cornerRadius};
-    border-color: #232166;
-  }
-
-  /* Bottom-left: square corner - green - pushed out */
-  &::after {
-    bottom: -${({ $size }) => sizeConfig[$size].offset};
-    left: -${({ $size }) => sizeConfig[$size].offset};
-    border-top: none;
-    border-right: none;
-    border-color: #98b21d;
-  }
 `;
 
 const LogoText = styled.div<{ $animateLogo?: boolean; $size: LogoSize }>`
@@ -126,17 +97,20 @@ const LogoText = styled.div<{ $animateLogo?: boolean; $size: LogoSize }>`
   opacity: 0;
   max-width: 16px;
   padding: 0;
+  box-sizing: content-box;
 
   @keyframes fadeInGrow {
     0% {
       opacity: 0;
       max-width: 16px;
       padding: 0;
+      transform: translateX(-20px);
     }
     100% {
       opacity: 1;
       max-width: 300px;
       padding: ${({ $size }) => sizeConfig[$size].padding};
+      transform: translateX(0);
     }
   }
 
@@ -151,6 +125,8 @@ const HeavyText = styled.span<{ $size: LogoSize }>`
   font-weight: 900;
   display: block;
   letter-spacing: 0.025em;
+  line-height: 1;
+  padding-top: 0.125 rem;
 
   ${(props) => props.theme.mediaQueries.tablet} {
     font-size: 0.9em;
@@ -165,6 +141,8 @@ const LightText = styled.span<{ $size: LogoSize }>`
   font-weight: 300;
   display: block;
   letter-spacing: -0.05em;
+  line-height: 1;
+  padding-top: 0.125rem;
 
   ${(props) => props.theme.mediaQueries.tablet} {
     font-size: 0.9em;
@@ -172,6 +150,29 @@ const LightText = styled.span<{ $size: LogoSize }>`
 
   ${(props) => props.theme.mediaQueries.mobile} {
     font-size: 0.8em;
+  }
+`;
+
+const LogoMarkWrapper = styled.div<{ $size: LogoSize; $variant: LogoVariant }>`
+  height: ${({ $size, $variant }) => {
+    const baseSize = sizeConfig[$size].fontSize;
+    const sizeValue = parseFloat(baseSize);
+    const unit = baseSize.replace(/[\d.]/g, "");
+
+    // Make logomark variant 1.5x bigger to match text scaling
+    const multiplier = $variant === "logomark" ? 1.25 : 1;
+    // Make height same as the font size with line-height applied
+    return `${sizeValue * multiplier}${unit}`;
+  }};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1.2;
+  margin-left: 0.25rem;
+
+  svg {
+    height: 100%;
+    width: auto;
   }
 `;
 
@@ -189,6 +190,9 @@ export default function Logo({
         <LightText $size={size}>
           {variant === "logomark" ? "C" : "Consulting"}
         </LightText>
+        <LogoMarkWrapper $size={size} $variant={variant}>
+          <LogoMark />
+        </LogoMarkWrapper>
       </LogoText>
     </LogoContainer>
   );

@@ -91,7 +91,7 @@ export default function HeroHeader() {
     <HeroContainer>
       <HeroImageWrapper>
         <StyledImage
-          src="/static-assets/hero-image.png"
+          src="/static-assets/hero.png"
           alt="Hero background"
           fill
           style={{
