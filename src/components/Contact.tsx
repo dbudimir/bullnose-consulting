@@ -275,7 +275,7 @@ const Contact: React.FC = () => {
               name="message"
               value={formData.message}
               onChange={handleChange}
-              placeholder="Tell us about your project or how we can help..."
+              placeholder="Tell us how we can help..."
             />
           </FormGroup>
 

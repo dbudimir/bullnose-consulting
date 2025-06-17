@@ -47,13 +47,15 @@ const About: React.FC = () => {
         <Title>About</Title>
         <Content>
           <p>
-            At Bullnose Consulting, we combine real-world construction
+            At Bullnose Consulting, we combine real world construction
             experience with CFO-level financial insight and modern technology
             tools to help family owned and independently run contractors build
-            stronger, more profitable businesses. We&#39;ve spent over 20 years
-            in the field ourselves, so we understand the challenges you face and
-            how the right systems, tools, and financial strategy can make all
-            the difference.
+            stronger, leaner, more profitable businesses. We&#39;ve spent over
+            20 years in the industry ourselves, and understand the construction
+            landscape in DC, Maryland, Virginia, and Delaware. We also know
+            first hand how the right systems, tools, and financial strategy can
+            take a business from just getting by to running like a well-oiled,
+            profit-generating machine.
           </p>
           <p>
             We&#39;re passionate about supporting Small to Medium-Sized
@@ -62,8 +64,8 @@ const About: React.FC = () => {
             companies—without the bloated costs.
           </p>
           <p>
-            We&#39;ll handle the numbers and modernize your operations, so you
-            can stay focused on what you do best: building.
+            We&#39;ll handle the numbers, cut the waste, and modernize your
+            operations to help you unlock your company&#39;s true potential.
           </p>
         </Content>
       </AboutContainer>
