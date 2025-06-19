@@ -1,19 +1,10 @@
 import Head from "next/head";
-import styled from "styled-components";
 import Nav from "../components/Nav";
 import HeroHeader from "@/components/HeroHeader";
 import Features from "@/components/Features";
 import About from "@/components/About";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
-
-const Container = styled.div`
-  min-height: 100dvh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
 
 export default function Home() {
   return (

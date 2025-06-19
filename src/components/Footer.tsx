@@ -128,11 +128,12 @@ const Footer: React.FC = () => {
             </LogoContainer>
 
             <FooterText>
-              <EmailAddress href="mailto:contact@bullnoseconsulting.com">
-                contact@bullnoseconsulting.com
+              <EmailAddress href="mailto:info@bullnoseconsulting.com">
+                info@bullnoseconsulting.com
               </EmailAddress>
               <Copyright>
-                © 2024 Bullnose Consulting. All rights reserved.
+                © {new Date().getFullYear()} Bullnose Consulting. All rights
+                reserved.
               </Copyright>
             </FooterText>
           </FooterBarContent>

@@ -43,6 +43,30 @@ const FeatureCard = styled.div`
   justify-content: center;
 `;
 
+const DiagnosticCard = styled(FeatureCard)`
+  ${(props) => props.theme.mediaQueries.tablet} {
+    order: 1;
+  }
+`;
+
+const VirtualCFOCard = styled(FeatureCard)`
+  ${(props) => props.theme.mediaQueries.tablet} {
+    order: 3;
+  }
+`;
+
+const StrategicCard = styled(FeatureCard)`
+  ${(props) => props.theme.mediaQueries.tablet} {
+    order: 2;
+  }
+`;
+
+const TechCard = styled(FeatureCard)`
+  ${(props) => props.theme.mediaQueries.tablet} {
+    order: 4;
+  }
+`;
+
 const IconContainer = styled.div`
   width: 60px;
   height: 60px;
@@ -105,7 +129,7 @@ const Features: React.FC = () => {
 
         {/* Top Feature */}
         <FeaturesGrid>
-          <FeatureCard>
+          <DiagnosticCard>
             <IconContainer>
               <DiagnosticAssessment />
             </IconContainer>
@@ -114,9 +138,9 @@ const Features: React.FC = () => {
               Pinpoint where your money is leaking and what&#39;s holding your
               business back, so you can stop guessing and start fixing.
             </FeatureBenefit>
-          </FeatureCard>
+          </DiagnosticCard>
 
-          <FeatureCard>
+          <VirtualCFOCard>
             <IconContainer>
               <VirtualCFO />
             </IconContainer>
@@ -126,9 +150,9 @@ const Features: React.FC = () => {
               full-time staff, giving you clarity, control, and confidence in
               your cash flow.
             </FeatureBenefit>
-          </FeatureCard>
+          </VirtualCFOCard>
 
-          <FeatureCard>
+          <StrategicCard>
             <IconContainer>
               <StrategicPartnership />
             </IconContainer>
@@ -139,9 +163,9 @@ const Features: React.FC = () => {
               and streamline your back office—so you get paid faster and run
               smarter, without big-firm costs.
             </FeatureBenefit>
-          </FeatureCard>
+          </StrategicCard>
 
-          <FeatureCard>
+          <TechCard>
             <IconContainer>
               <TechIntegration />
             </IconContainer>
@@ -152,7 +176,7 @@ const Features: React.FC = () => {
               Save hours of manual work, reduce costly errors, and get real-time
               insights, so you can make smarter decisions, faster.
             </FeatureBenefit>
-          </FeatureCard>
+          </TechCard>
         </FeaturesGrid>
       </FeaturesContainer>
     </Section>
