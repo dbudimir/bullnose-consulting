@@ -1,3 +1,5 @@
+"use client";
+
 import LogoMark from "@/icons/LogoMark";
 import styled, { css } from "styled-components";
 

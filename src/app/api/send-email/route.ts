@@ -1,4 +1,4 @@
-import type { NextApiRequest, NextApiResponse } from "next";
+import { NextRequest, NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 
 interface ContactFormData {
@@ -8,31 +8,32 @@ interface ContactFormData {
   message: string;
 }
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
-  console.log("req.body", req.body);
-  console.log("env", process.env.EMAIL_USER);
-  console.log("env", process.env.EMAIL_APP_PASSWORD);
-  console.log("env", process.env.EMAIL_TO);
-
-  if (req.method !== "POST") {
-    return res.status(405).json({ error: "Method not allowed" });
-  }
-
+export async function POST(request: NextRequest) {
   try {
-    const { name, email, company, message }: ContactFormData = req.body;
+    const body: ContactFormData = await request.json();
+
+    console.log("req.body", body);
+    console.log("env", process.env.EMAIL_USER);
+    console.log("env", process.env.EMAIL_APP_PASSWORD);
+    console.log("env", process.env.EMAIL_TO);
+
+    const { name, email, company, message } = body;
 
     // Validate required fields
     if (!name || !email || !message) {
-      return res.status(400).json({ error: "Missing required fields" });
+      return NextResponse.json(
+        { error: "Missing required fields" },
+        { status: 400 }
+      );
     }
 
     // Validate email format
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
-      return res.status(400).json({ error: "Invalid email format" });
+      return NextResponse.json(
+        { error: "Invalid email format" },
+        { status: 400 }
+      );
     }
 
     // Create transporter
@@ -83,9 +84,15 @@ export default async function handler(
     // Send email
     await transporter.sendMail(mailOptions);
 
-    res.status(200).json({ message: "Email sent successfully" });
+    return NextResponse.json(
+      { message: "Email sent successfully" },
+      { status: 200 }
+    );
   } catch (error) {
     console.error("Email sending error:", error);
-    res.status(500).json({ error: "Failed to send email" });
+    return NextResponse.json(
+      { error: "Failed to send email" },
+      { status: 500 }
+    );
   }
 }

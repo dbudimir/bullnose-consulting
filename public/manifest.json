@@ -1,0 +1,21 @@
+{
+  "name": "Bullnose Consulting",
+  "short_name": "Bullnose",
+  "description": "Financial services and consulting for construction contractors",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#232166",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "32x32",
+      "type": "image/x-icon"
+    }
+  ],
+  "categories": ["business", "finance", "consulting"],
+  "lang": "en-US",
+  "scope": "/",
+  "id": "bullnose-consulting"
+}

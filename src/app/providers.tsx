@@ -1,13 +1,14 @@
-import type { AppProps } from "next/app";
+"use client";
+
 import { ThemeProvider } from "styled-components";
 import GlobalStyle from "@/styles/GlobalStyle";
 import { theme } from "@/styles/theme";
 
-export default function App({ Component, pageProps }: AppProps) {
+export default function Providers({ children }: { children: React.ReactNode }) {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
-      <Component {...pageProps} />
+      {children}
     </ThemeProvider>
   );
 }
